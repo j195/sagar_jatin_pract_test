@@ -97,7 +97,7 @@ class ModelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Model $model): RedirectResponse
+    public function destroy(CarModel $model): RedirectResponse
     {
         $model->delete();
 

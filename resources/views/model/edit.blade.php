@@ -24,6 +24,19 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="inputName" class="form-label"><strong>Brand:</strong></label>
+                    <select name="brand_id" class="form-control @error('brand_id') is-invalid @enderror" id="inputName">
+                        <option value="">Select Brand</option>
+                        @foreach ($brands as $brand)
+                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('name')
+                        <div class="form-text text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="inputDetail" class="form-label"><strong>Logo:</strong></label>
                     <textarea class="form-control @error('logo') is-invalid @enderror" style="height:150px" name="logo" id="inputDetail"
                         placeholder="Detail">{{ $brand->logo }}</textarea>
