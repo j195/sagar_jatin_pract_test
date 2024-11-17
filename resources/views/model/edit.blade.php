@@ -2,15 +2,15 @@
 
 @section('content')
     <div class="card mt-5">
-        <h2 class="card-header">Edit Brand</h2>
+        <h2 class="card-header">Edit Model</h2>
         <div class="card-body">
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a class="btn btn-primary btn-sm" href="{{ route('brands.index') }}"><i class="fa fa-arrow-left"></i>
+                <a class="btn btn-primary btn-sm" href="{{ route('models.index') }}"><i class="fa fa-arrow-left"></i>
                     Back</a>
             </div>
 
-            <form action="{{ route('brands.update', $brand->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('models.update', $model->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -25,7 +25,8 @@
 
                 <div class="mb-3">
                     <label for="inputDetail" class="form-label"><strong>Logo:</strong></label>
-                    <input type="file" name="logo" id="image" value="{{ $brand->logo }}">
+                    <textarea class="form-control @error('logo') is-invalid @enderror" style="height:150px" name="logo" id="inputDetail"
+                        placeholder="Detail">{{ $brand->logo }}</textarea>
                     @error('logo')
                         <div class="form-text text-danger">{{ $message }}</div>
                     @enderror

@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="card mt-5">
-        <h2 class="card-header">Brands | List</h2>
+        <h2 class="card-header">Models | List</h2>
         <div class="card-body">
 
             @session('success')
@@ -11,30 +11,32 @@
             @endsession
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a class="btn btn-success btn-sm" href="{{ route('brands.create') }}"> <i class="fa fa-plus"></i> Create New
-                    Brand</a>
+                <a class="btn btn-success btn-sm" href="{{ route('models.create') }}"> <i class="fa fa-plus"></i> Create New
+                    Models</a>
             </div>
 
             <table class="table table-bordered table-striped mt-4">
                 <thead>
                     <tr>
                         <th width="80px">No.</th>
+                        <th width="80px">Brand</th>
                         <th>Name</th>
-                        <th>Logo</th>
+                        <th>Image</th>
                         <th width="250px">Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @forelse ($brands as $brand)
+                    @forelse ($models as $model)
                         <tr>
                             <td>{{ ++$i }}</td>
-                            <td>{{ $brand->name }}</td>
-                            <td><img src="{{ url('storage/' . $brand->logo) }}" height="50"></td>
+                            <td>{{ $model->brand_name }}</td>
+                            <td>{{ $model->name }}</td>
+                            <td><img src="{{ url('storage/' . $model->image) }}" height="50"></td>
                             <td>
-                                <form action="{{ route('brands.destroy', $brand->id) }}" method="POST">
+                                <form action="{{ route('models.destroy', $model->id) }}" method="POST">
 
-                                    <a class="btn btn-primary btn-sm" href="{{ route('brands.edit', $brand->id) }}"><i
+                                    <a class="btn btn-primary btn-sm" href="{{ route('models.edit', $model->id) }}"><i
                                             class="fa-solid fa-pen-to-square"></i> Edit</a>
 
                                     @csrf
@@ -54,7 +56,7 @@
 
             </table>
 
-            {!! $brands->links() !!}
+            {!! $models->links() !!}
 
         </div>
     </div>

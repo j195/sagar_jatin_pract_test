@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Models extends Model
+class CarModel extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,HasFactory;
     protected $table = 'models';
     protected $primaryKey = 'id';
 
@@ -17,7 +18,7 @@ class Models extends Model
         'name',
         'brand_id',
         'image',
-        'manufacturing_year'
+        'manufacturing_year',
     ];
 
 }
