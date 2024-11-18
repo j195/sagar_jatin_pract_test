@@ -21,5 +21,6 @@ Route::controller(RegisterController::class)->group(function(){
 
 Route::middleware('auth:sanctum')->group( function () {
     Route::get('brands/details', 'App\Http\Controllers\API\BrandController@brandDetails');
+    Route::post('createModel', 'App\Http\Controllers\API\BrandController@storeModel');
     Route::resource('brands', BrandController::class);
 });

@@ -14,6 +14,13 @@ class ModelResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'brand_id' => $this->brand_id,
+            'name' => $this->name,
+            'manufacturing_year' => $this->manufacturing_year,
+            'created_at' => $this->created_at->format('d/m/Y'),
+            'updated_at' => $this->updated_at->format('d/m/Y'),
+        ];
     }
 }

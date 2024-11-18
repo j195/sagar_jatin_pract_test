@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Brand;
+use App\Models\CarModel;
 use Validator;
 use App\Http\Resources\BrandResource;
+use App\Http\Resources\ModelResource;
 use Illuminate\Http\JsonResponse;
 
 class BrandController extends BaseController
@@ -49,6 +51,38 @@ class BrandController extends BaseController
         $brand = Brand::create($input);
 
         return $this->sendResponse(new BrandResource($brand), 'Brand created successfully.');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeModel(Request $request): JsonResponse
+    {
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'brand_id' => 'required',
+            'manufacturing_year' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $brandID = Brand::where('name','=',$request->brand_id)->first();
+
+        if (is_null($brandID)) {
+            return $this->sendError('Brand not found.');
+        }
+        //print_r($input['brand']);die;
+        $input['brand_id'] = $brandID->id;
+        //$input = $request->all();
+        $CarModel = CarModel::create($input);
+        return $this->sendResponse(new ModelResource($CarModel), 'Car Model created successfully.');
     }
 
     /**
